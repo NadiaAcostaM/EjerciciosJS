@@ -58,15 +58,13 @@
     <div id="iframe-container"></div>
 
     <script>
+        
         function ejecutarScript(scriptName) {
-            // Limpiar la consola
             console.clear();
-
-            // Crear un iframe temporal
             const iframeContainer = document.getElementById('iframe-container');
             iframeContainer.innerHTML = '';
 
-            if (scriptName === '37_RelojDigital.js' || '34_TareasPendientes.js') {
+            if (scriptName === '37_RelojDigital.js' || scriptName === '34_TareasPendientes.js') {
                 const script = document.createElement('script');
                 script.src = `scripts/${scriptName}`;
                 document.head.appendChild(script);
@@ -75,24 +73,20 @@
                 iframe.style.display = 'none';
                 iframeContainer.appendChild(iframe);
 
-                // Crear documento básico en el iframe
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 iframeDoc.open();
                 iframeDoc.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Temp Script Execution</title>
-                    <script src="scripts/${scriptName}"><\/script>
-                </head>
-                <body>
-                    <p>Ejecutando script...</p>
-                </body>
-                </html>
-            `);
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Temp</title>
+                        <script src="scripts/${scriptName}"><\/script>
+                    </head>
+                    <body></body>
+                    </html>
+                `);
                 iframeDoc.close();
 
-                // Eliminar el iframe después de un tiempo
                 setTimeout(() => {
                     iframeContainer.innerHTML = '';
                 }, 1000);
