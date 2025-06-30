@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Ejercicios JS</title>
+</head>
+
+<body>
+    <h1>Ejercicios JavaScript</h1>
+    <small>Nadia Montserrat Acosta Miranda</small>
+    <p>Los resultados de la mayoría de los script se mostrarán en la consola del navegador. Otros en alerts.</p>
+    <div class="container">
+        <button onclick="ejecutarScript('1_HolaMundo.js')">1. Hola Mundo</button>
+        <button onclick="ejecutarScript('2_VariablesValores.js')">2. Variables</button>
+        <button onclick="ejecutarScript('3_Operaciones.js')">3. Operaciones</button>
+        <button onclick="ejecutarScript('4_ConcatenarCadenas.js')">4. Concatenar</button>
+        <button onclick="ejecutarScript('5_CondicionalNumPrimos.js')">5. Números Primos</button>
+        <button onclick="ejecutarScript('6_Fibonacci.js')">6. Fibonacci</button>
+        <button onclick="ejecutarScript('7_FuncionSuma.js')">7. Función Suma</button>
+        <button onclick="ejecutarScript('8_ParImpar.js')">8. Par/Impar</button>
+        <button onclick="ejecutarScript('9_ConvertidorGrados.js')">9. Convertidor Grados</button>
+        <button onclick="ejecutarScript('10_NumMayorArreglo.js')">10. Número Mayor</button>
+        <button onclick="ejecutarScript('11_NumVocales.js')">11. Contar Vocales</button>
+        <button onclick="ejecutarScript('12_Factorial.js')">12. Factorial</button>
+        <button onclick="ejecutarScript('13_Palindromo.js')">13. Palíndromo</button>
+        <button onclick="ejecutarScript('14_NumAleatorio.js')">14. Número Aleatorio</button>
+        <button onclick="ejecutarScript('15_ElementosArreglo.js')">15. Elementos Arreglo</button>
+        <button onclick="ejecutarScript('16_SumaArreglo.js')">16. Suma Arreglo</button>
+        <button onclick="ejecutarScript('17_ValorMinArreglo.js')">17. Valor Mínimo</button>
+        <button onclick="ejecutarScript('18_InvertirArreglo.js')">18. Invertir Arreglo</button>
+        <button onclick="ejecutarScript('19_CombinarArreglos.js')">19. Combinar Arreglos</button>
+        <button onclick="ejecutarScript('20_ElementosDup.js')">20. Eliminar Duplicados</button>
+        <button onclick="ejecutarScript('21_ArregloAscendente.js')">21. Arreglo Ascendente</button>
+        <button onclick="ejecutarScript('22_Indice.js')">22. Índice</button>
+        <button onclick="ejecutarScript('23_SumaDigitos.js')">23. Suma Dígitos</button>
+        <button onclick="ejecutarScript('24_Estadisticas.js')">24. Estadísticas</button>
+        <button onclick="ejecutarScript('25_DecimalBinario.js')">25. Decimal a Binario</button>
+        <button onclick="ejecutarScript('26_BusquedaBinaria.js')">26. Búsqueda Binaria</button>
+        <button onclick="ejecutarScript('27_Anagramas.js')">27. Anagramas</button>
+        <button onclick="ejecutarScript('28_Parentesis.js')">28. Paréntesis</button>
+        <button onclick="ejecutarScript('29_Subsecuencia.js')">29. Subsecuencia</button>
+        <button onclick="ejecutarScript('30_TorreHanoi.js')">30. Torre de Hanoi</button>
+        <button onclick="ejecutarScript('31_ContraAleatorias.js')">31. Contraseñas Aleatorias</button>
+        <button onclick="ejecutarScript('32_ConvertidorUnidades.js')">32. Convertidor Unidades</button>
+        <button onclick="ejecutarScript('33_AdivinarNum.js')">33. Adivinar Número</button>
+        <button onclick="ejecutarScript('34_TareasPendientes.js')">34. Tareas Pendientes</button>
+        <button onclick="ejecutarScript('35_Calculadora.js')">35. Calculadora Básica</button>
+        <button onclick="ejecutarScript('36_ConversorDivisas.js')">36. Conversor de Divisas</button>
+        <button onclick="ejecutarScript('37_RelojDigital.js')">37. Reloj Digital</button>
+        <button onclick="ejecutarScript('38_PiedraPapelTijera.js')">38. Piedra, Papel o Tijeras</button>
+        <button onclick="ejecutarScript('39_TarjetasFelicitacion.js')">39. Tarjetas de Felicitación</button>
+        <button onclick="ejecutarScript('40_BuscadorRecetas.js')">40. Buscador de Recetas</button>
+    </div>
+
+    <div id="iframe-container"></div>
+
+    <script>
+        function ejecutarScript(scriptName) {
+            // Limpiar la consola
+            console.clear();
+
+            // Crear un iframe temporal
+            const iframeContainer = document.getElementById('iframe-container');
+            iframeContainer.innerHTML = '';
+
+            if (scriptName === '37_RelojDigital.js' || '34_TareasPendientes.js') {
+                const script = document.createElement('script');
+                script.src = `scripts/${scriptName}`;
+                document.head.appendChild(script);
+            } else {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframeContainer.appendChild(iframe);
+
+                // Crear documento básico en el iframe
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Temp Script Execution</title>
+                    <script src="scripts/${scriptName}"><\/script>
+                </head>
+                <body>
+                    <p>Ejecutando script...</p>
+                </body>
+                </html>
+            `);
+                iframeDoc.close();
+
+                // Eliminar el iframe después de un tiempo
+                setTimeout(() => {
+                    iframeContainer.innerHTML = '';
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+
+</html>
